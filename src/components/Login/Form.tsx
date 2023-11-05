@@ -1,30 +1,27 @@
 import { Stack, Input, Button } from '@chakra-ui/react';
-import React, { useState, ChangeEvent, useId } from 'react';
+
+import React, { ChangeEvent, useId } from 'react';
+import useAuthContext from '../../hooks/useAuthContext';
 import { useNavigate } from 'react-router-dom';
 
 const Form: React.FC = () => {
-  const [dataLogin, setDataLogin] = useState({
-    username: '',
-    password: '',
-  });
-
   const id = useId();
+  const { userData, setUserData, login } = useAuthContext();
+  const { usuario, password } = userData;
   const navigate = useNavigate();
-
-  const { username, password } = dataLogin;
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setDataLogin((prevState) => ({ ...prevState, [name]: value }));
+    setUserData((prevState) => ({ ...prevState, [name]: value }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (Object.values(dataLogin).includes('')) return;
+    if (Object.values(userData).includes('')) return;
 
-    navigate('/');
-    setDataLogin({ username: '', password: '' });
+    login(usuario, password);
+    // navigate('/');
   };
 
   return (
@@ -40,25 +37,25 @@ const Form: React.FC = () => {
       onSubmit={handleSubmit}
     >
       <Stack>
-        <label htmlFor={`${id}--username`}>Username</label>
+        <label htmlFor={`${id}--usuario`}>Usuario</label>
         <Input
           type="text"
-          name="username"
-          id={`${id}--username`}
-          value={username}
+          name="usuario"
+          id={`${id}--usuario`}
+          value={usuario}
           onChange={handleInputChange}
-          placeholder="Username"
+          placeholder="Usuario"
         />
       </Stack>
       <Stack>
-        <label htmlFor={`${id}--password`}>Password</label>
+        <label htmlFor={`${id}--password`}>Contraseña</label>
         <Input
           type="password"
           name="password"
           id={`${id}--password`}
           value={password}
           onChange={handleInputChange}
-          placeholder="Password"
+          placeholder="Contraseña"
         />
       </Stack>
       <Button

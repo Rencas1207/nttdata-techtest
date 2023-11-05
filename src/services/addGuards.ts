@@ -1,8 +1,6 @@
 import clientAxios from '../config/axios';
 
-const getGuards = async (filterDate: any) => {
-  const { startDate, endDate } = filterDate;
-
+const addGuards = async (newGuard?: string) => {
   const options = {
     headers: {
       AuthToken:
@@ -11,14 +9,15 @@ const getGuards = async (filterDate: any) => {
   };
 
   try {
-    const result = await clientAxios.get(
-      `/admin/guardias/equipo/55?fecha_ini=${startDate}&fecha_fin=${endDate}`,
+    const result = await clientAxios.post(
+      `/admin/guardias/equipo/55/agente/postulante?tipo_guardia=1&fecha_guardia=${newGuard}`,
+      {},
       options
     );
     return result.data;
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
+    console.log(error.response.data);
   }
 };
 
-export default getGuards;
+export default addGuards;

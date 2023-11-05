@@ -19,7 +19,7 @@ export default extendTheme({
   },
   sizes: {
     container: {
-      xl: '1280px',
+      xl: '1440px',
     },
   },
 });
