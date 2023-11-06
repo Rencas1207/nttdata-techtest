@@ -8,6 +8,7 @@ export default extendTheme({
     global: () => ({
       'html, body, #root': {
         height: '100%',
+        minHeight: '100vh',
       },
       '::-webkit-scrollbar': {
         w: '10px',
@@ -28,6 +29,6 @@ export default extendTheme({
     xs: '0.9rem',
   },
   breakpoints: {
-    lg: '1100px',
+    lg: '1080px',
   },
 });

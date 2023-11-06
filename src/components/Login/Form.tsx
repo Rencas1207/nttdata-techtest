@@ -6,17 +6,25 @@ import {
   FormLabel,
   FormControl,
   Heading,
+  IconButton,
 } from '@chakra-ui/react';
-import React, { ChangeEvent, useId } from 'react';
+import React, { ChangeEvent, useId, useState } from 'react';
 import useAuthContext from '../../hooks/useAuthContext';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 
 const Form: React.FC = () => {
   const id = useId();
   const { userData, setUserData, login, setAuth } = useAuthContext();
   const { usuario, password } = userData;
+  const [showPassword, setShowPassword] = useState(false);
+
   const navigate = useNavigate();
   const toast = useToast();
+
+  const togglePassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -46,6 +54,7 @@ const Form: React.FC = () => {
       setUserData({ usuario: '', password: '' });
       return;
     }
+    alert(data.msg);
 
     setAuth({
       token: data.owl,
@@ -75,7 +84,7 @@ const Form: React.FC = () => {
       onSubmit={handleSubmit}
     >
       <Heading as="h1" size={'lg'} textAlign="center">
-        Login
+        Iniciar Sesión
       </Heading>
       <FormControl>
         <FormLabel htmlFor={`${id}--usuario`}>Usuario</FormLabel>
@@ -91,12 +100,31 @@ const Form: React.FC = () => {
       <FormControl>
         <FormLabel htmlFor={`${id}--password`}>Contraseña</FormLabel>
         <Input
-          type="password"
+          type={showPassword ? 'text' : 'password'}
           name="password"
           id={`${id}--password`}
           value={password}
           onChange={handleInputChange}
           placeholder="Contraseña"
+        />
+        <IconButton
+          position="absolute"
+          right="4px"
+          bg="transparent"
+          zIndex="5"
+          _hover={{ bg: 'transparent' }}
+          _active={{ bg: 'transparent' }}
+          _focusVisible={{ boxShadow: 'none' }}
+          boxShadow="none"
+          aria-label="show/hide password"
+          icon={
+            showPassword ? (
+              <AiFillEye width="60px" height="60px" />
+            ) : (
+              <AiFillEyeInvisible width="60px" height="60px" />
+            )
+          }
+          onClick={togglePassword}
         />
       </FormControl>
       <Button
