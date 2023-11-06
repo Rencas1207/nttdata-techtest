@@ -45,26 +45,26 @@ const Form: React.FC = () => {
 
     let data: any;
     data = await login(usuario, password);
-    if (!data.id_rol) {
+
+    if (!data?.id_rol) {
       toast({
-        title: data.msg,
+        title: data?.msg || 'Error de CORS has been blocked by CORS policy',
         status: 'error',
         isClosable: true,
       });
       setUserData({ usuario: '', password: '' });
       return;
     }
-    alert(data.msg);
 
     setAuth({
-      token: data.owl,
-      user: data.nom_agente,
+      token: data?.owl,
+      user: data?.nom_agente,
       authenticated: true,
     });
     setUserData({ usuario: '', password: '' });
     let authStorage = {
-      token: data.owl,
-      user: data.nom_agente,
+      token: data?.owl,
+      user: data?.nom_agente,
       authenticated: true,
     };
     localStorage.setItem('auth', JSON.stringify(authStorage));

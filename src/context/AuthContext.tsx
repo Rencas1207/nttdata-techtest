@@ -1,5 +1,6 @@
 import React, { createContext, useState } from 'react';
 import { UserData } from '../libs/type';
+import clientAxios from '../config/axios';
 
 type AuthContextType = {
   userData: UserData;
@@ -39,11 +40,22 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
       `https://opembpo.emeal.nttdata.com/pre/validar_usuario?usuario=${usuario}&password=${password}`,
       {
         method: 'POST',
+        redirect: 'manual',
       }
     )
       .then((response) => response.json())
       .then((result) => result)
       .catch((error) => console.log('error', error));
+    // try {
+    //   const result = await clientAxios.post(
+    //     `/pre/validar_usuario?usuario=${usuario}&password=${password}`
+    //   );
+
+    //   console.log(result.data);
+    //   return result.data;
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   return (
