@@ -1,18 +1,23 @@
 import React, { createContext, useState } from 'react';
 import { UserData } from '../libs/type';
 
-import clientAxios from '../config/axios';
-import axios from 'axios';
-
 type AuthContextType = {
   userData: UserData;
   setUserData: React.Dispatch<React.SetStateAction<UserData>>;
-  login: (usuario: string, password: string) => void;
+  login: Function;
+  auth: AuthState;
+  setAuth: React.Dispatch<React.SetStateAction<AuthState>>;
 };
 
 type AuthContextProps = {
   children: React.ReactNode;
 };
+
+interface AuthState {
+  token: string | null;
+  user: string;
+  authenticated: boolean;
+}
 
 export const AuthContext = createContext<AuthContextType | null>(null);
 
@@ -22,28 +27,29 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
     password: '',
   });
 
-  // const navigate = useNavigate();
+  const dataAuth = JSON.parse(localStorage.getItem('auth') || '{}');
+  const [auth, setAuth] = useState<AuthState>({
+    token: dataAuth ? dataAuth.token : '',
+    authenticated: dataAuth ? dataAuth.authenticated : false,
+    user: dataAuth ? dataAuth.user : '',
+  });
 
-  const login = async (user: string, pwd: string) => {
-    console.log(user, pwd);
-
-    try {
-      const result = await clientAxios.post(
-        `/pre/validar_usuario?usuario=${user}&password=${pwd}`,
-        {}
-      );
-      console.log(result.data);
-      return result.data;
-    } catch (error: any) {
-      console.log(error.response.data);
-    }
-
-    // console.log(results);
-    // setUserData({ usuario: '', password: '' });
+  const login = async (usuario: string, password: string) => {
+    return await fetch(
+      `https://opembpo.emeal.nttdata.com/pre/validar_usuario?usuario=${usuario}&password=${password}`,
+      {
+        method: 'POST',
+      }
+    )
+      .then((response) => response.json())
+      .then((result) => result)
+      .catch((error) => console.log('error', error));
   };
 
   return (
-    <AuthContext.Provider value={{ userData, setUserData, login }}>
+    <AuthContext.Provider
+      value={{ userData, setUserData, login, auth, setAuth }}
+    >
       {children}
     </AuthContext.Provider>
   );

@@ -1,15 +1,25 @@
 import { extendTheme, theme } from '@chakra-ui/react';
-import { mode } from '@chakra-ui/theme-tools';
 
 export default extendTheme({
   colors: {
     primary: theme.colors.red,
   },
   styles: {
-    global: (props: any) => ({
+    global: () => ({
       'html, body, #root': {
-        color: mode(undefined, 'whiteAlpha.900')(props),
         height: '100%',
+      },
+      '::-webkit-scrollbar': {
+        w: '10px',
+        bgColor: 'white',
+        borderRadius: '20px',
+      },
+      '::-webkit-scrollbar-thumb': {
+        bgColor: '#9B2C2C',
+        borderRadius: '20px',
+      },
+      '*': {
+        scrollbarColor: '#9B2C2C',
       },
     }),
   },
@@ -17,9 +27,7 @@ export default extendTheme({
     sm: '0.95rem',
     xs: '0.9rem',
   },
-  sizes: {
-    container: {
-      xl: '1440px',
-    },
+  breakpoints: {
+    lg: '1100px',
   },
 });

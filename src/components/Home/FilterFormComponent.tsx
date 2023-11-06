@@ -10,7 +10,7 @@ import {
 import useGuardContext from '../../hooks/useGuardContext';
 import getGuards from '../../services/getGuards';
 
-const FilterFormComponent = () => {
+const FilterFormComponent: React.FC = () => {
   const { filterDate, setIsFiltering, handleInputChange, setIsLoading } =
     useGuardContext();
   const { startDate, endDate } = filterDate;
@@ -34,14 +34,14 @@ const FilterFormComponent = () => {
   };
 
   return (
-    <Stack>
+    <>
       <Heading as="h2" size="lg">
         Filtrar los guardias por rangos de fechas
       </Heading>
       <Stack
         as="form"
         onSubmit={handleSubmit}
-        flexDirection="row"
+        flexDirection={{ base: 'column', lg: 'row' }}
         alignItems="end"
         spacing={5}
         padding={3}
@@ -68,15 +68,15 @@ const FilterFormComponent = () => {
         </FormControl>
         <Button
           type="submit"
-          w="80%"
-          // mx="auto"
+          w={{ base: '100%', md: '60%', lg: '80%' }}
           colorScheme="primary"
+          marginX={{ base: 'auto', lg: '0' }}
           padding={5}
         >
           Filtrar
         </Button>
       </Stack>
-    </Stack>
+    </>
   );
 };
 

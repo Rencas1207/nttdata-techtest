@@ -27,7 +27,7 @@ const ModalComponent = ({ isOpen, onClose }: Props) => {
     e.preventDefault();
     if (!dateGuard) return;
     const result = await addGuard(dateGuard);
-    if (result != 'Listo') {
+    if (result !== 'Listo') {
       toast({
         title:
           'El usuario ya cuenta con una guardia registrada en la fecha indicada.',

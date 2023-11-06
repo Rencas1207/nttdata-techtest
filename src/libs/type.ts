@@ -1,3 +1,9 @@
+export type UserAuth = {
+  token: string;
+  authenticated: boolean;
+  user: string;
+};
+
 export type UserData = {
   usuario: string;
   password: string;
@@ -7,7 +13,6 @@ export interface Guard {
   id_guardia: number;
   estado_guardia: string;
   fecha_guardia: string;
-  fecha_registro_guardia: string;
   agente: Agente;
 }
 
@@ -29,4 +34,10 @@ export interface Rol {
 export interface FilterDate {
   startDate: string;
   endDate: string;
+}
+
+export interface FormatOptions {
+  year: 'numeric' | '2-digit';
+  month: 'numeric' | '2-digit' | 'narrow' | 'short' | 'long';
+  day: 'numeric' | '2-digit';
 }

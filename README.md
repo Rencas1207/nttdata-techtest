@@ -1,27 +1,21 @@
-# React + TypeScript + Vite
+# Prueba técnica
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Tecnologías a utilizar
 
-Currently, two official plugins are available:
+> React y Javascript
+> Axios (opcional)
+> Chakra UI (opcional)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[✅] Implementar un login para que el usuario pueda ingresar id y password. En caso de pasar por la validación, dirigir al usuario a la página de guardias.
 
-## Expanding the ESLint configuration
+[✅] Implementar una página de guardias donde el usuario pueda visualizar todas las guardias de su propio equipo en una tabla. El usuario debe poder filtrar las guardias por rango de fechas.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+[✅] Implementar dentro de la página de guardias una sección para registrar nuevas guardias. Las guardias deberán ser asociadas al usuario que está logueado. La sección tendrás los siguientes elementos:
 
-- Configure the top-level `parserOptions` property like this:
+- Campo para colocar la fecha de la guardia.
+- Botón de registro de guardia.
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+**Criterio adicional (no obligatorio)**
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+[✅] Mostrar mensaje adecuado en caso de que falle la validación del login.
+[✅] Por defecto mostrar solo guardias del mes actual.

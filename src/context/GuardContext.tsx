@@ -2,12 +2,13 @@ import React, { ChangeEvent, createContext, useEffect, useState } from 'react';
 import addGuards from '../services/addGuards';
 import { FilterDate, Guard } from '../libs/type';
 import getGuards from '../services/getGuards';
+import useAuthContext from '../hooks/useAuthContext';
 
 type GuardContextType = {
   dateGuard: string;
   setDateGuard: React.Dispatch<React.SetStateAction<string>>;
   addGuard: Function;
-  handleInputChange: any; // todo refactoe
+  handleInputChange: any;
   guards: Guard[];
   setGuards: React.Dispatch<React.SetStateAction<any>>;
   filterDate: FilterDate;
@@ -34,10 +35,13 @@ export const GuardProvider = ({ children }: GuardContextProps) => {
     endDate: '2023-11-30',
   });
 
+  const { auth } = useAuthContext();
+  const { authenticated } = auth;
+
   useEffect(() => {
     async function result() {
       let results: any = [];
-      if (isFiltering) {
+      if (isFiltering || authenticated) {
         results = await getGuards(filterDate);
         setGuards(results);
         setIsFiltering(false);
@@ -45,7 +49,7 @@ export const GuardProvider = ({ children }: GuardContextProps) => {
       }
     }
     result();
-  }, [isFiltering]);
+  }, [isFiltering, authenticated]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
