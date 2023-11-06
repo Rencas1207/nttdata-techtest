@@ -40,7 +40,6 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
       `https://opembpo.emeal.nttdata.com/pre/validar_usuario?usuario=${usuario}&password=${password}`,
       {
         method: 'POST',
-        redirect: 'manual',
       }
     )
       .then((response) => response.json())
