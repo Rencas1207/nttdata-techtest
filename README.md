@@ -1,9 +1,9 @@
-# Prueba técnica
+# Prueba Técnica - NTT Data
 
 ## Tecnologías a utilizar
 
-> React y Javascript
-> Axios (opcional)
+> React y Javascript |
+> Axios (opcional) |
 > Chakra UI (opcional)
 
 [✅] Implementar un login para que el usuario pueda ingresar id y password. En caso de pasar por la validación, dirigir al usuario a la página de guardias.
@@ -18,4 +18,5 @@
 **Criterio adicional (no obligatorio)**
 
 [✅] Mostrar mensaje adecuado en caso de que falle la validación del login.
+
 [✅] Por defecto mostrar solo guardias del mes actual.
