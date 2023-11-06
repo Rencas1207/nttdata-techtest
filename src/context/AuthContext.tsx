@@ -1,6 +1,5 @@
 import React, { createContext, useState } from 'react';
 import { UserData } from '../libs/type';
-import clientAxios from '../config/axios';
 
 type AuthContextType = {
   userData: UserData;
