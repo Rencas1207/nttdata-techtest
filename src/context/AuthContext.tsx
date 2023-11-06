@@ -46,16 +46,6 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
       .then((response) => response.json())
       .then((result) => result)
       .catch((error) => console.log('error', error));
-    // try {
-    //   const result = await clientAxios.post(
-    //     `/pre/validar_usuario?usuario=${usuario}&password=${password}`
-    //   );
-
-    //   console.log(result.data);
-    //   return result.data;
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
 
   return (
